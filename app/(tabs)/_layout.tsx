@@ -1,7 +1,7 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 import Entypo from '@expo/vector-icons/Entypo';
-import { HapticTab } from '@/components/HapticTab';
+import { HapticTab } from '@/components/tab/hapticTab';
 
 export default function TabLayout() {
 
