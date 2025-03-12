@@ -16,14 +16,16 @@ SplashScreen.preventAutoHideAsync();
 
 const customTheme = {
   colors: {
-    primary: '#FF5722', // Change purple to orange
-    accent: '#FF9800',  // Accent color
-    background: '#FFF', // Background color
-    surface: '#FFFFFF',  // Card background
-    text: '#212121',     // Text color
-    onSurface: '#000000', // Icon color
-    error: '#E53935',     // Vibrant red for error
-    onError: '#FFFFFF',   // Text color on error background
+    primary: '#FF5722',    // Change purple to orange
+    accent: '#FF9800',     // Accent color
+    background: '#FFF',    // Background color
+    surface: '#FFFFFF',    // Card background
+    text: '#212121',       // Text color
+    onSurface: '#000000',  // Icon color
+    error: '#E53935',      // Vibrant red for error
+    onError: '#FFFFFF',    // Text color on error background
+    surfaceDisabled: '#BDBDBD',   // Disabled state color for buttons, inputs, etc.
+    onSurfaceDisabled: '#757575', // Text or icon color on disabled elements
   },
 };
 

@@ -7,12 +7,11 @@ export default async function fetchAvailableCabins(data: fetchAvailableCabinsDat
     const dateOutFormatted = dateOut.toISOString();
 
     try {
-        const response = await fetch(`http://192.168.1.35:3000/api/cabin?dateIn=${dateInFormatted}&dateOut=${dateOutFormatted}&visitorQuantity=${visitorQuantity}`, {
+        const response = await fetch(`https://golondrinas-api.vercel.app/api/cabin?dateIn=${dateInFormatted}&dateOut=${dateOutFormatted}&visitorQuantity=${visitorQuantity}`, {
             method: 'GET',
         });
         
         if (!response.ok) {
-            console.log(response)
             throw new Error('Failed to fetch available cabins');
         };
 
