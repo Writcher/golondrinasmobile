@@ -139,7 +139,7 @@ export default function CreateReservation() {
   const { mutate: reservationMutatino } = useMutation({
     mutationFn: (data: createReservationData) => createReservation(data),
     onSuccess: () => {
-      router.back();
+      router.push('/(tabs)?isSuccess=true')
     }
   });
 
