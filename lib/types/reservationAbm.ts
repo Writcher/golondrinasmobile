@@ -7,7 +7,8 @@ export type formData = {
     selectedCabins: number[],
     price: number,
     clientName: string,
-    isSecondPhase: boolean
+    isSecondPhase: boolean,
+    alreadySearched: boolean 
 }
 
 export type fetchAvailableCabinsData = {

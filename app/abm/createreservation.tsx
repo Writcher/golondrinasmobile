@@ -7,11 +7,11 @@ import { useMutation } from '@tanstack/react-query';
 import fetchAvailableCabins from "@/services/cabin";
 import { createReservationData, fetchAvailableCabinsData, formData } from "@/lib/types/reservationAbm";
 import MyDatePicker from "@/components/ui/abm/datePicker";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ChipDisplay from "@/components/ui/abm/chipDisplay";
 import ABMTextInput from "@/components/ui/abm/textInput";
 import { HelperText } from "react-native-paper";
-import createReservation from "@/services/reservation";
+import { createReservation } from "@/services/reservation";
 
 registerTranslation('es', es);
 
@@ -30,30 +30,25 @@ export default function CreateReservation() {
       dateOutVisible: false,
       selectedCabins: [],
       isSecondPhase: false,
+      alreadySearched: false
     }
   });
 
+  const alreadySearched = watch("alreadySearched");
   const isSecondPhase = watch("isSecondPhase");
 
   //DateIn Picker
   const dateIn = watch("dateIn");
-  const dateInVisible = watch("dateInVisible");
-
-  const onDateInConfirm = (params: any) => {
-    setValue("dateInVisible", false);
-    setValue("dateIn", params.date);
-  };
-
-  const onDateInDismiss = () => {
-    setValue("dateInVisible", false);
-  };
 
   const dateInProps = {
     setValue,
     date: dateIn,
-    visible: dateInVisible,
-    onConfirm: onDateInConfirm,
-    onDismiss: onDateInDismiss,
+    visible: watch("dateInVisible"),
+    onConfirm: (params: any) => {
+      setValue("dateInVisible", false);
+      setValue("dateIn", params.date);
+    },
+    onDismiss: () => setValue("dateInVisible", false),
     label: "Fecha de Ingreso",
     errors: errors,
     isDateIn: true,
@@ -62,23 +57,16 @@ export default function CreateReservation() {
 
   //DateOut Picker
   const dateOut = watch("dateOut");
-  const dateOutVisible = watch("dateOutVisible");
-
-  const onDateOutConfirm = (params: any) => {
-    setValue("dateOutVisible", false);
-    setValue("dateOut", params.date);
-  };
-
-  const onDateOutDismiss = () => {
-    setValue("dateOutVisible", false);
-  };
 
   const dateOutProps = {
     setValue,
     date: dateOut,
-    visible: dateOutVisible,
-    onConfirm: onDateOutConfirm,
-    onDismiss: onDateOutDismiss,
+    visible: watch("dateOutVisible"),
+    onConfirm: (params: any) => {
+      setValue("dateOutVisible", false);
+      setValue("dateOut", params.date);
+    },
+    onDismiss: () => setValue("dateOutVisible", false),
     label: "Fecha de Egreso",
     errors: errors,
     isDateIn: false,
@@ -93,8 +81,6 @@ export default function CreateReservation() {
       clearErrors("dateOut");
     }
   }, [dateIn, dateOut]);
-
-  const [alreadySearched, setAlreadySearched] = useState(false);
 
   const { mutate: cabinMutation, data: fetchedCabins, isPending: fetchingCabins } = useMutation({
     mutationFn: (data: fetchAvailableCabinsData) => fetchAvailableCabins(data),
@@ -111,7 +97,7 @@ export default function CreateReservation() {
       setError("dateOut", { type: "manual", message: "La combinación de fechas no es valida." });
       return;
     };
-    setAlreadySearched(true);
+    setValue("alreadySearched", true);
     setValue("selectedCabins", []);
     cabinMutation({
       dateIn: dateIn,
