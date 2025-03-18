@@ -1,16 +1,15 @@
-import { createReservationData } from "@/lib/types/reservationAbm";
-
-type fetchReservationListData = {
-    month: number,
-    year: number,
-};
+import { createReservationData } from "@/lib/types/reservation";
 
 export async function createReservation(data: createReservationData) {
     try {
-        const response = await fetch('https://golondrinas-api.vercel.app/api/reservation', {
+        const API_URL = process.env.EXPO_PUBLIC_API_URL;
+        const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
+        
+        const response = await fetch(`${API_URL}reservation`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${API_KEY}`,
             },
             body: JSON.stringify(data),
         });
@@ -25,31 +24,6 @@ export async function createReservation(data: createReservationData) {
 
     } catch (error) {
         console.error('Error creating reservation:', error);
-        throw error;
-    };
-}
-
-export async function fetchReservationList(data: fetchReservationListData) {
-    try {
-        const queryParams = new URLSearchParams({
-            month: data.month.toString(),
-            year: data.year.toString(),
-        });
-
-        const response = await fetch(`https://golondrinas-api.vercel.app/api/reservations?${queryParams.toString()}`, {
-            method: 'GET',
-        });
-
-        if (!response.ok) {
-            const errorResponse = await response.json();
-            throw new Error(errorResponse.error || 'An error occurred while fetching the reservations list');
-        };
-
-        const responseData = await response.json();
-        return responseData;
-
-    } catch (error) {
-        console.error('Error fetching reservation list:', error);
         throw error;
     };
 }

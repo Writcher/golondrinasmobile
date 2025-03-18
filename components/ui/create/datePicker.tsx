@@ -1,7 +1,7 @@
 import { TextInput } from "react-native-paper";
 import { DatePickerModal } from "react-native-paper-dates";
 import { FieldErrors, UseFormSetValue } from "react-hook-form";
-import { formData } from "@/lib/types/reservationAbm";
+import { formData } from "@/lib/types/reservation";
 
 export default function MyDatePicker({ setValue, date, isDateIn, visible, onConfirm, onDismiss, label, isSecondPhase, errors }: {
     setValue: UseFormSetValue<formData>,

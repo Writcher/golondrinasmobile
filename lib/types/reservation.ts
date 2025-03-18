@@ -11,12 +11,6 @@ export type formData = {
     alreadySearched: boolean 
 }
 
-export type fetchAvailableCabinsData = {
-    dateIn: Date,
-    dateOut: Date,
-    visitorQuantity: number
-}
-
 export type createReservationData = {
     dateIn: Date,
     dateOut: Date,

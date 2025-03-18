@@ -1,4 +1,4 @@
-import { formData } from "@/lib/types/reservationAbm";
+import { formData } from "@/lib/types/reservation";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 import { KeyboardTypeOptions, View } from "react-native";
 import { HelperText, TextInput } from "react-native-paper";

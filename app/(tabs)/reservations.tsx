@@ -5,8 +5,8 @@ import dayjs from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
 import "dayjs/locale/es";
 import { useQuery } from "@tanstack/react-query";
-import { fetchReservationList } from "@/services/reservation";
 import InfoModal from "@/components/ui/list/infoModal";
+import { fetchReservationList } from "@/services/reservations";
 
 dayjs.extend(isBetween);
 

@@ -5,13 +5,14 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { es, registerTranslation } from 'react-native-paper-dates';
 import { useMutation } from '@tanstack/react-query';
 import fetchAvailableCabins from "@/services/cabin";
-import { createReservationData, fetchAvailableCabinsData, formData } from "@/lib/types/reservationAbm";
-import MyDatePicker from "@/components/ui/abm/datePicker";
 import { useEffect } from "react";
-import ChipDisplay from "@/components/ui/abm/chipDisplay";
-import ABMTextInput from "@/components/ui/abm/textInput";
 import { HelperText } from "react-native-paper";
 import { createReservation } from "@/services/reservation";
+import { createReservationData, formData } from "@/lib/types/reservation";
+import { fetchAvailableCabinsData } from "@/lib/types/cabin";
+import ABMTextInput from "@/components/ui/create/textInput";
+import ChipDisplay from "@/components/ui/create/chipBox";
+import MyDatePicker from "@/components/ui/create/datePicker";
 
 registerTranslation('es', es);
 

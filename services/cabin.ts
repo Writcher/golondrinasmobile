@@ -1,16 +1,25 @@
-import { fetchAvailableCabinsData } from "@/lib/types/reservationAbm";
+import { fetchAvailableCabinsData } from '@/lib/types/cabin';
 
 export default async function fetchAvailableCabins(data: fetchAvailableCabinsData) {
-    const { dateIn, dateOut, visitorQuantity } = data;
+    try {        
+        const API_URL = process.env.EXPO_PUBLIC_API_URL;
+        const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
 
-    const dateInFormatted = dateIn.toISOString();
-    const dateOutFormatted = dateOut.toISOString();
+        const { dateIn, dateOut, visitorQuantity } = data;
 
-    try {
-        const response = await fetch(`https://golondrinas-api.vercel.app/api/cabins?dateIn=${dateInFormatted}&dateOut=${dateOutFormatted}&visitorQuantity=${visitorQuantity}`, {
+        const queryParams = new URLSearchParams({
+            dateIn: dateIn.toISOString(),
+            dateOut: dateOut.toISOString(),
+            visitorQuantity: visitorQuantity.toString(),
+        })
+
+        const response = await fetch(`${API_URL}cabins?${queryParams.toString()}`, {
             method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${API_KEY}`,
+            },
         });
-        
+
         if (!response.ok) {
             throw new Error('Failed to fetch available cabins');
         };
