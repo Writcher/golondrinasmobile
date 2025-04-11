@@ -32,13 +32,6 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <Entypo name="list" size={24} color={color} />
         }}
       />
-      <Tabs.Screen
-        name="calendar"
-        options={{
-          title: 'Calendario',
-          tabBarIcon: ({ color }) => <Entypo name="calendar" size={24} color={color} />
-        }}
-      />
     </Tabs>
   );
 }
