@@ -1,7 +1,7 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 import Entypo from '@expo/vector-icons/Entypo';
-import { HapticTab } from '@/components/HapticTab';
+import { HapticTab } from '@/components/tab/hapticTab';
 
 export default function TabLayout() {
 
@@ -30,13 +30,6 @@ export default function TabLayout() {
         options={{
           title: 'Reservas',
           tabBarIcon: ({ color }) => <Entypo name="list" size={24} color={color} />
-        }}
-      />
-      <Tabs.Screen
-        name="calendar"
-        options={{
-          title: 'Calendario',
-          tabBarIcon: ({ color }) => <Entypo name="calendar" size={24} color={color} />
         }}
       />
     </Tabs>

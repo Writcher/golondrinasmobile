@@ -9,8 +9,25 @@ import * as React from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import 'react-native-reanimated';
 import "../global.css";
+import { QueryClientProvider } from '@tanstack/react-query';
+import queryClient from './queryProvider';
 
 SplashScreen.preventAutoHideAsync();
+
+const customTheme = {
+  colors: {
+    primary: '#FF5722',    // Change purple to orange
+    accent: '#FF9800',     // Accent color
+    background: '#FFF',    // Background color
+    surface: '#FFFFFF',    // Card background
+    text: '#212121',       // Text color
+    onSurface: '#000000',  // Icon color
+    error: '#E53935',      // Vibrant red for error
+    onError: '#FFFFFF',    // Text color on error background
+    surfaceDisabled: '#BDBDBD',   // Disabled state color for buttons, inputs, etc.
+    onSurfaceDisabled: '#757575', // Text or icon color on disabled elements
+  },
+};
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -29,16 +46,18 @@ export default function RootLayout() {
   }
 
   return (
-    <PaperProvider>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack
-          screenOptions={{
-            headerShown: false,
-          }}>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        </Stack>
-        <StatusBar style="dark" />
-      </ThemeProvider>
-    </PaperProvider >
+    <QueryClientProvider client={queryClient}>
+      <PaperProvider theme={customTheme}>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <Stack
+            screenOptions={{
+              headerShown: false,
+            }}>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          </Stack>
+          <StatusBar style="dark" />
+        </ThemeProvider>
+      </PaperProvider >
+    </QueryClientProvider>
   )
 }
