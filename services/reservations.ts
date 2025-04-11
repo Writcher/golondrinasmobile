@@ -67,8 +67,10 @@ export async function fetchTodayOutsList(data: fetchTodayOutsListData) {
         const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
 
         const queryParams = new URLSearchParams({
-            dateIn: data.dateOut.toISOString(),
+            dateOut: data.dateOut.toISOString(),
         });
+
+        console.log("dateout se ejecuto")
 
         const response = await fetch(`${API_URL}reservations?${queryParams.toString()}`, {
             method: 'GET',
@@ -83,6 +85,7 @@ export async function fetchTodayOutsList(data: fetchTodayOutsListData) {
         };
 
         const responseData = await response.json();
+        console.log(responseData[0])
         return responseData;
 
     } catch (error) {
